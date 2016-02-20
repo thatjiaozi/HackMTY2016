@@ -14,10 +14,8 @@ import java.net.Socket;
 
 public class LogIn extends AppCompatActivity {
 
-
-
     private Socket socConexion;
-
+    private int Prueba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
