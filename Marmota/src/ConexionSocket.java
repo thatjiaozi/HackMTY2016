@@ -39,6 +39,11 @@ public class ConexionSocket implements Runnable{
         if(iType == 1){
             try {
                 String strDatos = bfrEntrada.readLine();
+               /* if(dbConexion.login(strDatos)){
+                    dosSalida.writeInt(2);
+                }else{
+                    dosSalida.writeInt(3);
+                }*/
             } catch (IOException ex) {
                 Logger.getLogger(ConexionSocket.class.getName())
                         .log(Level.SEVERE, null, ex);
