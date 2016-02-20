@@ -8,9 +8,19 @@ import java.net.*;
  * @author JuanJosé
  */
 public class Servidor{
-    final int puerto = 7890;
+    private final static int iPuerto = 7890;
+    private static ServerSocket svsServidor;
     public static void main(String[] args){
-                
+        try{
+        svsServidor = new ServerSocket(iPuerto);
+        while (true){
+            Socket scEntrante = svsServidor.accept();
+            System.out.println("conexion entrante de "+scEntrante.toString());
+            ConexionSocket conEntrante = new ConexionSocket(scEntrante);
+        }
+        }catch(Exception e){
+            System.out.println("main serv"+e);
+        }
     }
 
    
