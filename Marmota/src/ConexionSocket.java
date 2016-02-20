@@ -16,7 +16,7 @@ import java.util.logging.Logger;
  */
 public class ConexionSocket implements Runnable{
     private int iType;
-    //private Database dbConexion;
+    private Database dbConexion;
     private Socket socConexion;
     private BufferedReader bfrEntrada;
     private DataOutputStream dosSalida;
@@ -30,7 +30,7 @@ public class ConexionSocket implements Runnable{
         }catch(Exception e){
             System.out.println(e);
         }
-        
+        dbConexion = new Database();
         new Thread(this).start();
     }
 
@@ -39,11 +39,12 @@ public class ConexionSocket implements Runnable{
         if(iType == 1){
             try {
                 String strDatos = bfrEntrada.readLine();
-               /* if(dbConexion.login(strDatos)){
+                System.out.println(strDatos);
+               if(dbConexion.login(strDatos)){
                     dosSalida.writeInt(2);
                 }else{
                     dosSalida.writeInt(3);
-                }*/
+                }
             } catch (IOException ex) {
                 Logger.getLogger(ConexionSocket.class.getName())
                         .log(Level.SEVERE, null, ex);
