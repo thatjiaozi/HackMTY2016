@@ -19,8 +19,8 @@
         android:layout_gravity="bottom|end" android:layout_margin="@dimen/fab_margin"
         android:src="@android:drawable/ic_dialog_email" />
 
-    <android.support.design.widget.TextInputLayout>
-        
-    </android.support.design.widget.TextInputLayout>
+    <android.support.v7.widget.Toolbar
+        android:layout_width="90px"
+        android:layout_height="10px"></android.support.v7.widget.Toolbar>
 
 </android.support.design.widget.CoordinatorLayout>
