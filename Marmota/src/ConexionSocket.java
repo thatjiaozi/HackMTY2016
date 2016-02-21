@@ -16,6 +16,7 @@ import java.util.logging.Logger;
  */
 public class ConexionSocket implements Runnable{
     private int iType;
+    private String sUsuario;
     private Database dbConexion;
     private Socket socConexion;
     private BufferedReader bfrEntrada;
@@ -42,6 +43,22 @@ public class ConexionSocket implements Runnable{
                
                if(dbConexion.login(strDatos)){
                     dosSalida.writeChar('2');
+                    int iGato = strDatos.indexOf('#');
+                    
+                    sUsuario = strDatos.substring(0,iGato);
+                    while(!socConexion.isClosed()){
+                        int iActividad = Integer.parseInt(bfrEntrada.readLine());
+                        if(iActividad == 5){
+                            String strDescripcion = bfrEntrada.readLine();
+                            int iTipo = Integer.parseInt(bfrEntrada.readLine());
+                            double dLatitud = Double.
+                                    parseDouble(bfrEntrada.readLine());
+                            double dLongitud = Double
+                                    .parseDouble(bfrEntrada.readLine());
+                            if(dbConexion.incidente(sUsuario,strDescripcion,
+                                    iTipo,dLatitud,dLongitud));
+                        }
+                    }
                      socConexion.close();
                 }else{
                     dosSalida.writeChar('3');
