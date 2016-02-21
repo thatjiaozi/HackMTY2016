@@ -8,13 +8,31 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.content.Intent;
+import android.widget.EditText;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 public class IniciaSesionActivity extends AppCompatActivity {
+
+    private Socket socConect;
+    private BufferedReader bffEntrada;
+    private PrintWriter prwSalida;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicia_sesion);
+        try {
+            socConect = new Socket("10.12.175.205", 7890);
+            bffEntrada = new BufferedReader(new InputStreamReader(socConect.getInputStream()));
+            prwSalida = new PrintWriter(new OutputStreamWriter(socConect.getOutputStream()));
+        } catch(Exception e) {
+            System.out.println("No jala esa madre");
+        }
     }
 
     @Override
@@ -37,5 +55,12 @@ public class IniciaSesionActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void sendMessage(View view) {
+        Intent intent = new Intent(this, DisplayMessageActivity.class);
+        EditText editText = (EditText) findViewById(R.id.email);
+        String message = editText.getText().toString();
+        intent.putExtra(EXTRA_MESSAGE, message);
     }
 }
