@@ -1,6 +1,7 @@
 
 import java.io.*;
 import java.net.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -66,6 +67,38 @@ public class ConexionSocket implements Runnable{
                             if(dbConexion.incidente(new Incidente(sUsuario,
                             strDescripcion,iTipo,dLatitud,dLongitud,
                             iYear,iMes,iDia,iHora,iMinutos)));
+                        }else if(iActividad == 6){
+                            double dLongitud = Double.parseDouble(bfrEntrada
+                                    .readLine());
+                            double dLatitud = Double.parseDouble(bfrEntrada
+                                    .readLine());
+                            int iHInicio = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            int iMInicio = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            int iHFinal = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            int iMFinal = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            List<Incidente> lklIncidentes = dbConexion
+                                    .filtrarIncidenteHora(dLatitud,dLongitud
+                                          ,iHInicio,iMInicio, iHFinal, iMFinal);
+                            dosSalida.println(lklIncidentes.size());
+                            for(Incidente inElemento : lklIncidentes){
+                                dosSalida.println(inElemento.getDescripcion());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getDay());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getMonth());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getYear());
+                                dosSalida.println(inElemento.getHora());
+                                dosSalida.println(inElemento.getMinutos());
+                                dosSalida.println(inElemento.getLatitud());
+                                dosSalida.println(inElemento.getLongitud());
+                                dosSalida.println(inElemento.getTipo());
+                                
+                            }
                         }
                     }
                      socConexion.close();

@@ -1,6 +1,7 @@
 
 import static java.lang.System.currentTimeMillis;
 import java.sql.Connection;
+import java.sql.Date;
 import static java.sql.Date.valueOf;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -186,14 +187,42 @@ public class Database {
         List<Incidente> arrIncidentes = new ArrayList<Incidente>();
         PreparedStatement stmStatement;
         try {
-            String sQuery = "SELECT * FROM Incidentes Hora = ";
+            String sQuery = "SELECT * FROM Incidentes WHERE (Hora = ";
             sQuery += iHora1;
             sQuery += " AND Minutos >= ";
             sQuery += iMinutos1;
             if (iHora1 == iHora2) {
-                sQuery += " AND Minutos < ";
+                sQuery += " AND Minutos <= ";
                 sQuery += iMinutos2;
             }
+            else if (iHora1 < iHora2) {
+                sQuery += " OR Hora > ";
+                sQuery += iHora1;
+                sQuery += " AND Hora < ";
+                sQuery += iHora2;
+                sQuery += " OR Hora = ";
+                sQuery += iHora2;
+                sQuery += " AND Minutos <= ";
+                sQuery += iMinutos2;
+            }
+            else {
+                sQuery += " OR Hora > ";
+                sQuery += iHora1;
+                sQuery += " OR Hora < ";
+                sQuery += iHora2;
+                sQuery += " OR Hora = ";
+                sQuery += iHora2;
+                sQuery += " AND Minutos <= ";
+                sQuery += iMinutos2;
+            }
+            sQuery += ") AND Latitud >= ";
+            sQuery += (dLat - .0012);
+            sQuery += " AND Latitud < ";
+            sQuery += (dLat + .0012);
+            sQuery += " AND Longitud >= ";
+            sQuery += (dLong - .0012);
+            sQuery += " AND Longitud < ";
+            sQuery += (dLong + .0012);
             sQuery += ";";
             stmStatement = conConnection.prepareStatement(sQuery);
             ResultSet rsReply = stmStatement.executeQuery(sQuery);
@@ -209,5 +238,115 @@ public class Database {
             System.out.println(ex);
         }
     return arrIncidentes;
+    }
+    
+    public List<Incidente> filtrarIncidenteTipo(double dLat, double dLong,
+            int iHora1, int iMinutos1, int iHora2, int iMinutos2, int iType) {
+        List<Incidente> arrIncidentes = new ArrayList<Incidente>();
+        PreparedStatement stmStatement;
+        try {
+            String sQuery = "SELECT * FROM Incidentes WHERE (Hora = ";
+            sQuery += iHora1;
+            sQuery += " AND Minutos >= ";
+            sQuery += iMinutos1;
+            if (iHora1 == iHora2) {
+                sQuery += " AND Minutos <= ";
+                sQuery += iMinutos2;
+            }
+            else if (iHora1 < iHora2) {
+                sQuery += " OR Hora > ";
+                sQuery += iHora1;
+                sQuery += " AND Hora < ";
+                sQuery += iHora2;
+                sQuery += " OR Hora = ";
+                sQuery += iHora2;
+                sQuery += " AND Minutos <= ";
+                sQuery += iMinutos2;
+            }
+            else {
+                sQuery += " OR Hora > ";
+                sQuery += iHora1;
+                sQuery += " OR Hora < ";
+                sQuery += iHora2;
+                sQuery += " OR Hora = ";
+                sQuery += iHora2;
+                sQuery += " AND Minutos <= ";
+                sQuery += iMinutos2;
+            }
+            sQuery += ") AND Latitud >= ";
+            sQuery += (dLat - .0012);
+            sQuery += " AND Latitud < ";
+            sQuery += (dLat + .0012);
+            sQuery += " AND Longitud >= ";
+            sQuery += (dLong - .0012);
+            sQuery += " AND Longitud < ";
+            sQuery += (dLong + .0012);
+            sQuery += " AND Tipo = ";
+            sQuery += iType;
+            sQuery += ";";
+            stmStatement = conConnection.prepareStatement(sQuery);
+            ResultSet rsReply = stmStatement.executeQuery(sQuery);
+            while (rsReply.next()) {
+                Incidente idtCapturado = new Incidente(rsReply.getString("Usuario"),
+                        rsReply.getString("Descripcion"), rsReply.getInt("Tipo"),
+                        rsReply.getDouble("Latitud"), rsReply.getDouble("Longitud"),
+                        valueOf(rsReply.getString("Fecha")), rsReply.getInt("Hora"),
+                        rsReply.getInt("Minutos"));
+                arrIncidentes.add(idtCapturado);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    return arrIncidentes;
+    }
+    
+    public List<Incidente> filtrarIncidenteUsuario(String sUser) {
+        List<Incidente> arrIncidentes = new ArrayList<Incidente>();
+        PreparedStatement stmStatement;
+        try {
+            String sQuery = "SELECT * FROM Incidentes WHERE Usuario = '";
+            sQuery += sUser;
+            sQuery += "';";
+            stmStatement = conConnection.prepareStatement(sQuery);
+            ResultSet rsReply = stmStatement.executeQuery(sQuery);
+            while (rsReply.next()) {
+                Incidente idtCapturado = new Incidente(rsReply.getString("Usuario"),
+                        rsReply.getString("Descripcion"), rsReply.getInt("Tipo"),
+                        rsReply.getDouble("Latitud"), rsReply.getDouble("Longitud"),
+                        valueOf(rsReply.getString("Fecha")), rsReply.getInt("Hora"),
+                        rsReply.getInt("Minutos"));
+                arrIncidentes.add(idtCapturado);
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    return arrIncidentes;
+    }
+    
+    public boolean panicIncidente(String sUser, double dLat, double dLong, 
+            int iY, int iM, int iD, int iH, int iMin) {
+        PreparedStatement stmStatement;
+        try {
+            // Armar el query de INSERT con los datos del incidente
+            String sQuery = "INSERT INTO Incidentes VALUES('";
+            sQuery += sUser;
+            sQuery += currentTimeMillis();
+            sQuery += "', 4, ";
+            sQuery += dLat + ", " + dLong;
+            sQuery += ", ' ', '";
+            Date dteFecha = valueOf(iY + "-" + iM + "-" + iD);
+            sQuery += dteFecha.toString() + "', ";
+            sQuery += iH + ", " + iMin;
+            sQuery += ", '";
+            sQuery += sUser;
+            sQuery += "')";
+            stmStatement = conConnection.prepareStatement(sQuery);
+            // Agregar el incidente a la tabla
+            stmStatement.executeUpdate(sQuery);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return false;
     }
 }
