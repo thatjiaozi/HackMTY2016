@@ -1,13 +1,14 @@
 
 import static java.lang.System.currentTimeMillis;
 import java.sql.Connection;
+import static java.sql.Date.valueOf;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -125,8 +126,9 @@ public class Database {
         return false;
     }
     
-    public boolean filtrarIncidenteHora(int iHora1, int iMinutos1, int iHora2,
-            int iMinutos2) {
+    public List<Incidente> filtrarIncidenteHora(double dLat, double dLong,
+            int iHora1, int iMinutos1, int iHora2, int iMinutos2) {
+        List<Incidente> arrIncidentes = new ArrayList<Incidente>();
         PreparedStatement stmStatement;
         try {
             String sQuery = "SELECT * FROM Incidentes Hora = ";
@@ -140,11 +142,17 @@ public class Database {
             sQuery += ";";
             stmStatement = conConnection.prepareStatement(sQuery);
             ResultSet rsReply = stmStatement.executeQuery(sQuery);
-            return true;
+            while (rsReply.next()) {
+                Incidente idtCapturado = new Incidente(rsReply.getString("Usuario"),
+                        rsReply.getString("Descripcion"), rsReply.getInt("Tipo"),
+                        rsReply.getDouble("Latitud"), rsReply.getDouble("Longitud"),
+                        valueOf(rsReply.getString("Fecha")), rsReply.getInt("Hora"),
+                        rsReply.getInt("Minutos"));
+                arrIncidentes.add(idtCapturado);
+            }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
-        return false;
-        
+    return arrIncidentes;
     }
 }

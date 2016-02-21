@@ -35,6 +35,18 @@ public class Incidente {
         setFecha(iY, iM, iD);
     }
     
+    public Incidente(String sUser, String sDesc, int iT, double dLat,
+            double dLong, Date dteDate, int iH, int iMin) {
+        sUsuario = sUser;
+        sDescripcion = sDesc;
+        iTipo = iT;
+        dLatitud = dLat;
+        dLongitud = dLong;
+        iHora = iH;
+        iMinutos = iMin;
+        dteFecha = dteDate;
+    }
+    
     public String getUsuario() {
         return sUsuario;
     }
