@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.Button;
 import android.widget.EditText;
 import java.io.BufferedReader;
 import java.io.DataOutputStream;
@@ -21,10 +22,6 @@ import java.net.Socket;
 
 public class IniciaSesionActivity extends AppCompatActivity {
 
-
-
-    SocketAndroid sckaConect;
-    Socket scoConn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -53,9 +50,12 @@ public class IniciaSesionActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+<<<<<<< HEAD
+=======
 
     public void sendMessage(View view) {
 
-        
+
     }
+>>>>>>> da4ba75786f02a6b15f7f2b96079f35fcf21f9b9
 }
