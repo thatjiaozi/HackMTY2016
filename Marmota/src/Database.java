@@ -25,7 +25,7 @@ public class Database {
     private Connection conConnection;
     
     public Database () {
-        sUrl = "jdbc:mysql://10.12.175.205:3306/Marmota";
+        sUrl = "jdbc:mysql://127.0.0.1:3306/Marmota";
         sUser = "prueba";
         sPass = "123";
         connect();
