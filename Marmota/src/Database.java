@@ -43,6 +43,7 @@ public class Database {
     }
     
     public boolean login(String sInfo) {
+        System.out.println("login");
         int iGato = sInfo.indexOf('#');
         String sCorreo = sInfo.substring(0, iGato - 1);
         String sContra = sInfo.substring(iGato + 1);
