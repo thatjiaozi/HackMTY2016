@@ -51,7 +51,7 @@ public class ConexionSocket implements Runnable{
                     sUsuario = strDatos.substring(0,iGato);
                     while(!socConexion.isClosed()){
                         int iActividad = Integer.parseInt(bfrEntrada.readLine());
-                        if(iActividad == 4){
+                        if(iActividad == 5){
                             String strDescripcion = bfrEntrada.readLine();
                             int iTipo = Integer.parseInt(bfrEntrada.readLine());
                             double dLatitud = Double.
@@ -67,7 +67,7 @@ public class ConexionSocket implements Runnable{
                             if(dbConexion.incidente(new Incidente(sUsuario,
                             strDescripcion,iTipo,dLatitud,dLongitud,
                             iYear,iMes,iDia,iHora,iMinutos)));
-                        }else if(iActividad == 5){
+                        }else if(iActividad == 6){
                             double dLongitud = Double.parseDouble(bfrEntrada
                                     .readLine());
                             double dLatitud = Double.parseDouble(bfrEntrada
