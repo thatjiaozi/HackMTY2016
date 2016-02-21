@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.content.Intent;
+import android.widget.Button;
 import android.widget.EditText;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -56,5 +57,4 @@ public class IniciaSesionActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 }

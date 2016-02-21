@@ -1,0 +1,21 @@
+<resources>
+    <!--
+    TODO: Before you run your application, you need a Google Maps API key.
+
+    To get one, follow this link, follow the directions and press "Create" at the end:
+
+    https://console.developers.google.com/flows/enableapi?apiid=maps_android_backend&keyType=CLIENT_SIDE_ANDROID&r=7C:FC:9D:DF:DB:4E:57:C3:09:E3:E3:B3:C2:73:2A:7E:8E:EA:00:2E%3Bcom.example.guillermo.marmotaapp
+
+    You can also add your credentials to an existing key, using this line:
+    7C:FC:9D:DF:DB:4E:57:C3:09:E3:E3:B3:C2:73:2A:7E:8E:EA:00:2E;com.example.guillermo.marmotaapp
+
+    Alternatively, follow the directions here:
+    https://developers.google.com/maps/documentation/android/start#get-key
+
+    Once you have your key (it starts with "AIza"), replace the "google_maps_key"
+    string in this file.
+    -->
+    <string name="google_maps_key" translatable="false" templateMergeStrategy="preserve">
+        AIzaSyDgUnI3jsO3UKXHKLHNRJX4K497SFDS1gE
+    </string>
+</resources>
