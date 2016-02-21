@@ -30,11 +30,7 @@ public class Database {
         sUser = "prueba";
         sPass = "123";
         connect();
-        try{
-        System.out.println(conConnection.isClosed());
-        }catch(Exception e){
-            System.out.println(e);
-        }
+        
         
         
     }
