@@ -99,6 +99,26 @@ public class ConexionSocket implements Runnable{
                                 dosSalida.println(inElemento.getTipo());
                                 
                             }
+                        }else if(iActividad == 7){
+                            
+                            List<Incidente> lklUsuario = dbConexion
+                                    .filtrarIncidenteUsuario(sUsuario);
+                            dosSalida.println(lklUsuario.size());
+                            for(Incidente inElemento : lklUsuario){
+                                dosSalida.println(inElemento.getDescripcion());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getDay());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getMonth());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getYear());
+                                dosSalida.println(inElemento.getHora());
+                                dosSalida.println(inElemento.getMinutos());
+                                dosSalida.println(inElemento.getLatitud());
+                                dosSalida.println(inElemento.getLongitud());
+                                dosSalida.println(inElemento.getTipo());
+                                
+                            }
                         }
                     }
                      socConexion.close();
