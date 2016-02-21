@@ -1,0 +1,26 @@
+<resources>
+    <string name="app_name">AlertAt</string>
+    <string name="action_settings">Settings</string>
+
+    // Strings para actividad "Inicia Sesion"
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Ingresa Contraseña</string>
+    <string name="action_sign_in">Iniciar Sesión</string>
+    <string name="action_new_user">Registrate</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+
+    // Strings para la actividad "Registro"
+    <string name="action_register">Registrar</string>
+    <string name="prompt_password_register">Contraseña</string>
+
+
+    <string name="title_activity_registro">RegistroActivity</string>
+    <string name="title_activity_maps">Map</string>
+</resources>

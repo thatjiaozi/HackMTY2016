@@ -1,31 +1,29 @@
-package com.example.guillermo.marmotaapp;
+package hackmty2016.team34.alertat;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.Serializable;
-import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.Socket;
 
 /**
  * Created by JuanJosé on 20/02/2016.
  */
-public class SocketLogin implements Runnable, Serializable {
+public class SocketRegister implements Runnable {
     private String strMensaje;
     private boolean threadActivo;
     private boolean boolResultado;
-    public boolean bLogin(String entrada){
+    public boolean bRegister(String entrada){
+
         strMensaje = entrada;
         new Thread(this).start();
         threadActivo = true;
         while(threadActivo){
             try{
                 Thread.sleep(100);
-                System.out.println(threadActivo);
+
             }catch(Exception e){
                 System.out.println(e);
             }
@@ -40,7 +38,7 @@ public class SocketLogin implements Runnable, Serializable {
             BufferedReader buffEntrada = new BufferedReader(new InputStreamReader(socConn.getInputStream()));
             PrintWriter prSalida = new PrintWriter(new BufferedWriter(
                     new OutputStreamWriter(socConn.getOutputStream())),true);
-            prSalida.println("1");
+            prSalida.println("4");
             prSalida.println(strMensaje);
 
             String strRespuesta = buffEntrada.readLine();

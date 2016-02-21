@@ -1,6 +1,7 @@
 
 import java.io.*;
 import java.net.*;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -50,7 +51,7 @@ public class ConexionSocket implements Runnable{
                     sUsuario = strDatos.substring(0,iGato);
                     while(!socConexion.isClosed()){
                         int iActividad = Integer.parseInt(bfrEntrada.readLine());
-                        if(iActividad == 5){
+                        if(iActividad == 4){
                             String strDescripcion = bfrEntrada.readLine();
                             int iTipo = Integer.parseInt(bfrEntrada.readLine());
                             double dLatitud = Double.
@@ -66,6 +67,22 @@ public class ConexionSocket implements Runnable{
                             if(dbConexion.incidente(new Incidente(sUsuario,
                             strDescripcion,iTipo,dLatitud,dLongitud,
                             iYear,iMes,iDia,iHora,iMinutos)));
+                        }else if(iActividad == 5){
+                            double dLongitud = Double.parseDouble(bfrEntrada
+                                    .readLine());
+                            double dLatitud = Double.parseDouble(bfrEntrada
+                                    .readLine());
+                            int iHInicio = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            int iMInicio = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            int iHFinal = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            int iMFinal = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            List<Incidente> lklIncidentes = dbConexion
+                                    .filtrarIncidenteHora(dLatitud,dLongitud,iHInicio, 
+                                            iMInicio, iHFinal, iMFinal);
                         }
                     }
                      socConexion.close();
