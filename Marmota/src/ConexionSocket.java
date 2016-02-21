@@ -28,6 +28,7 @@ public class ConexionSocket implements Runnable{
                 getInputStream()));
         dosSalida = new DataOutputStream(socCon.getOutputStream());
         this.iType = Integer.parseInt(bfrEntrada.readLine());
+        System.out.println(iType);
         }catch(Exception e){
             System.out.println(e);
         }
