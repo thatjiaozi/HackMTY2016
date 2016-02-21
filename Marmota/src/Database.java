@@ -66,7 +66,7 @@ public class Database {
             
             System.out.println(ex);
         }
-        return true;
+        return false;
     }
     
     public boolean register(String sInfo) {
@@ -98,7 +98,38 @@ public class Database {
             
             System.out.println(ex);
         }
-        return true;
+        return false;
     }
-
+    
+    public boolean incidente(String sUsuario, String sDescripcion, int iTipo,
+            double dLatitud, double dLongitud, int iDia, int iMes, int iYear,
+            int iHora, int iMinutos) {
+        PreparedStatement stmStatement;
+        try {
+            String sQuery = "INSERT INTO Incidentes VALUES('";
+            sQuery += sUsuario;
+            sQuery += "', '";
+            sQuery += sDescripcion;
+            sQuery += "', " + iTipo + ", " + dLatitud + ", " + dLongitud + ", ";
+            sQuery += ", '" + iYear + "-";
+            if (iMes < 10)
+                sQuery += "0";
+            sQuery += iMes + "-";
+            if (iDia < 10)
+                sQuery += "0";
+            sQuery += iDia + " ";
+            if (iHora < 10)
+                sQuery += "0";
+            sQuery += iHora + ":";
+            if (iMinutos < 10)
+                sQuery += "0";
+            sQuery += iMinutos + ":00')";
+            stmStatement = conConnection.prepareStatement(sQuery);
+            stmStatement.executeUpdate(sQuery);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
 }
