@@ -27,7 +27,7 @@ public class SocketLogin implements Runnable {
         while(threadActivo){
             try{
                 Thread.sleep(100);
-
+                System.out.println(threadActivo);
             }catch(Exception e){
                 System.out.println(e);
             }
@@ -57,5 +57,11 @@ public class SocketLogin implements Runnable {
             System.out.println(e);
         }
         threadActivo = false;
+    }
+    public BufferedReader getBuffEntrada(){
+        return buffEntrada;
+    }
+    public PrintWriter getPrSalida(){
+        return prSalida;
     }
 }

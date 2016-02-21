@@ -9,6 +9,8 @@ import android.view.View;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import java.util.LinkedList;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -50,8 +52,18 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void login(View view){
-        SocketRegister sockLau;
-        sockLau = new SocketRegister();
-        System.out.println(sockLau.bRegister("lawea@gmail.com#13fs"));
+        SocketLogin socSesion;
+        socSesion = new SocketLogin();
+        if(socSesion.bLogin("prueba#probando")){
+            SocketIncidente socReportar;
+            socReportar = new SocketIncidente(socSesion);
+
+            LinkedList<Incidente> incidentes = socReportar.getIncidente(25.6514,-100.2885,0,0,15,30,5);
+            for(Incidente elemento :incidentes){
+                System.out.println(elemento.getDescripcion());
+            }
+        }else{
+            System.out.println("puto el que lo lea");
+        }
     }
 }

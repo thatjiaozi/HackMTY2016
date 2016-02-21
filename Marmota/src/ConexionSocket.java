@@ -30,7 +30,7 @@ public class ConexionSocket implements Runnable{
         dosSalida = new PrintWriter(new BufferedWriter(
             new OutputStreamWriter(socCon.getOutputStream())),true);
         this.iType = Integer.parseInt(bfrEntrada.readLine());
-        System.out.println(iType);
+        
         }catch(Exception e){
             System.out.println(e);
         }
@@ -43,7 +43,7 @@ public class ConexionSocket implements Runnable{
         if(iType == 1){
             try {
                 String strDatos = bfrEntrada.readLine();
-                System.out.println(strDatos);
+                
                if(dbConexion.login(strDatos)){
                     dosSalida.println('2');
                     int iGato = strDatos.indexOf('#');
@@ -51,6 +51,7 @@ public class ConexionSocket implements Runnable{
                     sUsuario = strDatos.substring(0,iGato);
                     while(!socConexion.isClosed()){
                         int iActividad = Integer.parseInt(bfrEntrada.readLine());
+                       System.out.println(iActividad);
                         if(iActividad == 5){
                             String strDescripcion = bfrEntrada.readLine();
                             int iTipo = Integer.parseInt(bfrEntrada.readLine());
@@ -59,18 +60,19 @@ public class ConexionSocket implements Runnable{
                             double dLongitud = Double
                                     .parseDouble(bfrEntrada.readLine());
                             int iDia,iMes,iYear,iHora,iMinutos;
-                            iDia = 14;
-                            iMes = 5;
-                            iYear = 1996;
-                            iHora = 10;
-                            iMinutos = 30;
+                            iDia = Integer.parseInt(bfrEntrada.readLine());
+                            iMes = Integer.parseInt(bfrEntrada.readLine());
+                            iYear = Integer.parseInt(bfrEntrada.readLine());
+                            iHora = Integer.parseInt(bfrEntrada.readLine());
+                            iMinutos = Integer.parseInt(bfrEntrada.readLine());
                             if(dbConexion.incidente(new Incidente(sUsuario,
                             strDescripcion,iTipo,dLatitud,dLongitud,
                             iYear,iMes,iDia,iHora,iMinutos)));
                         }else if(iActividad == 6){
-                            double dLongitud = Double.parseDouble(bfrEntrada
-                                    .readLine());
+                            
                             double dLatitud = Double.parseDouble(bfrEntrada
+                                    .readLine());
+                            double dLongitud = Double.parseDouble(bfrEntrada
                                     .readLine());
                             int iHInicio = Integer.parseInt(bfrEntrada
                                     .readLine());
@@ -80,6 +82,7 @@ public class ConexionSocket implements Runnable{
                                     .readLine());
                             int iMFinal = Integer.parseInt(bfrEntrada
                                     .readLine());
+                           
                             List<Incidente> lklIncidentes = dbConexion
                                     .filtrarIncidenteHora(dLatitud,dLongitud
                                           ,iHInicio,iMInicio, iHFinal, iMFinal);
@@ -120,9 +123,10 @@ public class ConexionSocket implements Runnable{
                                 
                             }
                         }else if(iActividad == 8){
-                            double dLongitud = Double.parseDouble(bfrEntrada
-                                    .readLine());
+                            
                             double dLatitud = Double.parseDouble(bfrEntrada
+                                    .readLine());
+                            double dLongitud = Double.parseDouble(bfrEntrada
                                     .readLine());
                             int iHInicio = Integer.parseInt(bfrEntrada
                                     .readLine());
