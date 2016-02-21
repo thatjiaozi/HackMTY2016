@@ -2,22 +2,20 @@ package com.example.juanjos.socketfunctions;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.Socket;
 
 /**
  * Created by JuanJosé on 20/02/2016.
  */
-public class SocketLogin implements Runnable {
+public class SocketRegister implements Runnable {
     private String strMensaje;
     private boolean threadActivo;
     private boolean boolResultado;
-    public boolean bLogin(String entrada){
+    public boolean bRegister(String entrada){
 
         strMensaje = entrada;
         new Thread(this).start();
@@ -39,8 +37,8 @@ public class SocketLogin implements Runnable {
             Socket socConn = new Socket(InetAddress.getByName("10.12.175.205"),7890);
             BufferedReader buffEntrada = new BufferedReader(new InputStreamReader(socConn.getInputStream()));
             PrintWriter prSalida = new PrintWriter(new BufferedWriter(
-            new OutputStreamWriter(socConn.getOutputStream())),true);
-            prSalida.println("1");
+                    new OutputStreamWriter(socConn.getOutputStream())),true);
+            prSalida.println("4");
             prSalida.println(strMensaje);
 
             String strRespuesta = buffEntrada.readLine();

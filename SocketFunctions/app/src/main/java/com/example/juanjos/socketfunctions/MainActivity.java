@@ -50,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
     public void login(View view){
-        SocketLogin sockLau;
-        sockLau = new SocketLogin();
-        System.out.println(sockLau.bLogin("marmota@marmota.com#123456"));
+        SocketRegister sockLau;
+        sockLau = new SocketRegister();
+        System.out.println(sockLau.bRegister("lawea@gmail.com#13fs"));
     }
 }
