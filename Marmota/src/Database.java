@@ -244,9 +244,9 @@ public class Database {
         List<Incidente> arrIncidentes = new ArrayList<Incidente>();
         PreparedStatement stmStatement;
         try {
-            String sQuery = "SELECT * FROM Incidentes WHERE Usuario = ";
+            String sQuery = "SELECT * FROM Incidentes WHERE Usuario = '";
             sQuery += sUser;
-            sQuery += ";";
+            sQuery += "';";
             stmStatement = conConnection.prepareStatement(sQuery);
             ResultSet rsReply = stmStatement.executeQuery(sQuery);
             while (rsReply.next()) {
