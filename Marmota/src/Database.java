@@ -101,12 +101,8 @@ public class Database {
         return false;
     }
     
-    public boolean incidente(String sUsuario, String sDescripcion, int iTipo,
-            double dLatitud, double dLongitud, int iDia, int iMes, int iYear,
-            int iHora, int iMinutos) {
+    public boolean incidente(Incidente idtPrueba) {
         PreparedStatement stmStatement;
-        Incidente idtPrueba = new Incidente(sUsuario, sDescripcion, iTipo,
-                dLatitud, dLongitud, iYear, iMes, iDia, iHora, iMinutos);
         try {
             String sQuery = "INSERT INTO Incidentes VALUES('";
             sQuery += idtPrueba.getUsuario();
