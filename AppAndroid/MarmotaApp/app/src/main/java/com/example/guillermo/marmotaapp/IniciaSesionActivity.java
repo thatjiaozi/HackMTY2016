@@ -21,10 +21,6 @@ import java.net.Socket;
 
 public class IniciaSesionActivity extends AppCompatActivity {
 
-
-
-    SocketAndroid sckaConect;
-    Socket scoConn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -56,6 +52,6 @@ public class IniciaSesionActivity extends AppCompatActivity {
 
     public void sendMessage(View view) {
 
-        
+
     }
 }
