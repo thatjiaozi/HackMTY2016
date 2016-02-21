@@ -1,6 +1,7 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -46,15 +47,15 @@ public class Database {
         int iGato = sInfo.indexOf('#');
         String sCorreo = sInfo.substring(0, iGato - 1);
         String sContra = sInfo.substring(iGato + 1);
-        Statement stmStatement;
+        PreparedStatement stmStatement;
         try {
-            stmStatement = conConnection.createStatement();
-            String sQuery = "SELECT * FROM Usuarios WHERE Correo = '" + sCorreo
-                    + "' AND Password = '" + sContra + "'";
+            String sQuery = "SELECT * FROM Usuarios WHERE Correo = ? AND Password = ?";
+            stmStatement = conConnection.prepareStatement(sQuery);
+            stmStatement.setString(1, sCorreo);
+            stmStatement.setString(2, sContra);
             try {
                 ResultSet rsReply = stmStatement.executeQuery(sQuery);
-                rsReply.absolute(1);
-                return (rsReply.getNString("Password").equals(sContra)) && (sCorreo == rsReply.getNString("Correo"));
+                return (rsReply.absolute(1));
             } catch (SQLException ex) {
                 throw new IllegalStateException("Cannot connect the database!", ex);
             }
@@ -64,15 +65,3 @@ public class Database {
         
     }
 
-    /**
-     * main
-     *
-     * lol
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        String sInfo = "blablabla#blablabla";
-            
-        }
-}
