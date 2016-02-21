@@ -39,7 +39,7 @@ public class ConexionSocket implements Runnable{
         if(iType == 1){
             try {
                 String strDatos = bfrEntrada.readLine();
-                System.out.println(strDatos);
+               
                if(dbConexion.login(strDatos)){
                     dosSalida.writeChar('2');
                      socConexion.close();
