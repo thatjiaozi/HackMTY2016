@@ -63,9 +63,9 @@ public class ConexionSocket implements Runnable{
                             iYear = 1996;
                             iHora = 10;
                             iMinutos = 30;
-                            if(dbConexion.incidente(sUsuario,strDescripcion,
-                                    iTipo,dLatitud,dLongitud,iDia,iMes,
-                                    iYear,iHora,iMinutos));
+                            if(dbConexion.incidente(new Incidente(sUsuario,
+                            strDescripcion,iTipo,dLatitud,dLongitud,
+                            iYear,iMes,iDia,iHora,iMinutos)));
                         }
                     }
                      socConexion.close();
