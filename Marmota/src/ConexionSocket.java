@@ -52,6 +52,21 @@ public class ConexionSocket implements Runnable{
                 Logger.getLogger(ConexionSocket.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
+        }else if(iType == 4){
+            try {
+                String strDatos = bfrEntrada.readLine();
+               if(dbConexion.register(strDatos)){
+                    dosSalida.writeChar('2');
+                     socConexion.close();
+                }else{
+                    dosSalida.writeChar('3');
+                    socConexion.close();
+                    
+                }
+            } catch (IOException ex) {
+                Logger.getLogger(ConexionSocket.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
         }
     }
 }
