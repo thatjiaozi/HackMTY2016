@@ -186,7 +186,7 @@ public class Database {
         List<Incidente> arrIncidentes = new ArrayList<Incidente>();
         PreparedStatement stmStatement;
         try {
-            String sQuery = "SELECT * FROM Incidentes Hora = ";
+            String sQuery = "SELECT * FROM Incidentes WHERE Hora = ";
             sQuery += iHora1;
             sQuery += " AND Minutos >= ";
             sQuery += iMinutos1;
