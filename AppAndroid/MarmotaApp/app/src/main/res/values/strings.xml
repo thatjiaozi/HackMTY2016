@@ -13,12 +13,16 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
+<<<<<<< HEAD
         completions."
     </string>
 
     // Strings para la actividad "Registro"
     <string name="action_register">Registrar</string>
     <string name="prompt_password_register">Contraseña</string>
+=======
+        completions."</string>
+>>>>>>> da4ba75786f02a6b15f7f2b96079f35fcf21f9b9
 
     <string name="title_activity_registro">RegistroActivity</string>
     <string name="title_activity_maps">Map</string>

@@ -28,6 +28,7 @@ public class ConexionSocket implements Runnable{
                 getInputStream()));
         dosSalida = new DataOutputStream(socCon.getOutputStream());
         this.iType = Integer.parseInt(bfrEntrada.readLine());
+        System.out.println(iType);
         }catch(Exception e){
             System.out.println(e);
         }
@@ -55,8 +56,15 @@ public class ConexionSocket implements Runnable{
                                     parseDouble(bfrEntrada.readLine());
                             double dLongitud = Double
                                     .parseDouble(bfrEntrada.readLine());
+                            int iDia,iMes,iYear,iHora,iMinutos;
+                            iDia = 14;
+                            iMes = 5;
+                            iYear = 1996;
+                            iHora = 10;
+                            iMinutos = 30;
                             if(dbConexion.incidente(sUsuario,strDescripcion,
-                                    iTipo,dLatitud,dLongitud));
+                                    iTipo,dLatitud,dLongitud,iDia,iMes,
+                                    iYear,iHora,iMinutos));
                         }
                     }
                      socConexion.close();

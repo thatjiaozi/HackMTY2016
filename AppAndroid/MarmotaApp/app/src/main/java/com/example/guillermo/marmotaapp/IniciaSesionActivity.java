@@ -1,6 +1,7 @@
 package com.example.guillermo.marmotaapp;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -12,6 +13,8 @@ import android.content.Intent;
 import android.widget.Button;
 import android.widget.EditText;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -19,21 +22,11 @@ import java.net.Socket;
 
 public class IniciaSesionActivity extends AppCompatActivity {
 
-    private Socket socConect;
-    private BufferedReader bffEntrada;
-    private PrintWriter prwSalida;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicia_sesion);
-        try {
-            socConect = new Socket("10.12.175.205", 7890);
-            bffEntrada = new BufferedReader(new InputStreamReader(socConect.getInputStream()));
-            prwSalida = new PrintWriter(new OutputStreamWriter(socConect.getOutputStream()));
-        } catch(Exception e) {
-            System.out.println("No jala esa madre");
-        }
+
     }
 
     @Override
@@ -57,4 +50,12 @@ public class IniciaSesionActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+<<<<<<< HEAD
+=======
+
+    public void sendMessage(View view) {
+
+
+    }
+>>>>>>> da4ba75786f02a6b15f7f2b96079f35fcf21f9b9
 }

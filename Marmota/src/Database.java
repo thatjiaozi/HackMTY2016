@@ -1,4 +1,5 @@
 
+import static java.lang.System.currentTimeMillis;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -66,7 +67,7 @@ public class Database {
             
             System.out.println(ex);
         }
-        return true;
+        return false;
     }
     
     public boolean register(String sInfo) {
@@ -94,11 +95,59 @@ public class Database {
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
-        } catch (SQLException ex) {
-            
+        } catch (SQLException ex) {  
             System.out.println(ex);
         }
-        return true;
+        return false;
     }
-
+    
+    public boolean incidente(String sUsuario, String sDescripcion, int iTipo,
+            double dLatitud, double dLongitud, int iDia, int iMes, int iYear,
+            int iHora, int iMinutos) {
+        PreparedStatement stmStatement;
+        try {
+            String sQuery = "INSERT INTO Incidentes VALUES('";
+            sQuery += sUsuario += currentTimeMillis();
+            sQuery += "', " + iTipo + ", " + dLatitud + ", " + dLongitud;
+            sQuery += ", '" + sDescripcion;
+            sQuery += "', '" + iYear + "-";
+            if (iMes < 10)
+                sQuery += "0";
+            sQuery += iMes + "-";
+            if (iDia < 10)
+                sQuery += "0";
+            sQuery += iDia + "', ";
+            sQuery += iHora + ", " + iMinutos + ", '";
+            sQuery += sUsuario + "')";
+            stmStatement = conConnection.prepareStatement(sQuery);
+            stmStatement.executeUpdate(sQuery);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return false;
+    }
+    
+    public boolean filtrarIncidenteHora(int iHora1, int iMinutos1, int iHora2,
+            int iMinutos2) {
+        PreparedStatement stmStatement;
+        try {
+            String sQuery = "SELECT * FROM Incidentes Hora = ";
+            sQuery += iHora1;
+            sQuery += " AND Minutos >= ";
+            sQuery += iMinutos1;
+            if (iHora1 == iHora2) {
+                sQuery += " AND Minutos < ";
+                sQuery += iMinutos2;
+            }
+            sQuery += ";";
+            stmStatement = conConnection.prepareStatement(sQuery);
+            ResultSet rsReply = stmStatement.executeQuery(sQuery);
+            return true;
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+        return false;
+        
+    }
 }
