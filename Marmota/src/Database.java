@@ -1,6 +1,7 @@
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -25,45 +26,54 @@ public class Database {
     private Connection conConnection;
     
     public Database () {
-        sUrl = "jdbc:mysql://127.0.0.1:3306/Marmota";
+        sUrl = "jdbc:mysql://10.12.175.205:3306/Marmota";
         sUser = "prueba";
         sPass = "123";
         connect();
-        String sInfo = "blablabla#blablabla";
-        System.out.println(login(sInfo));
+        try{
+        System.out.println(conConnection.isClosed());
+        }catch(Exception e){
+            System.out.println(e);
+        }
+        
+        
     }
     
     public void connect() {
-        try (Connection conPrueba = DriverManager.getConnection(sUrl, sUser, sPass)) {
-            System.out.println("Database connected!");
-            conConnection = conPrueba;
+        try {
+            conConnection = DriverManager.getConnection(sUrl, sUser, sPass);
+            
         } catch (SQLException e) {
             throw new IllegalStateException("Cannot connect the database!", e);
         }
     }
     
     public boolean login(String sInfo) {
-        System.out.println("login");
         int iGato = sInfo.indexOf('#');
-        String sCorreo = sInfo.substring(0, iGato - 1);
+        String sCorreo = sInfo.substring(0, iGato);
         String sContra = sInfo.substring(iGato + 1);
-        Statement stmStatement;
+        PreparedStatement stmStatement;
         try {
-            stmStatement = conConnection.createStatement();
-            String sQuery = "SELECT * FROM Usuarios WHERE Correo = '" + sCorreo
-                    + "' AND Password = '" + sContra + "'";
+            String sQuery = "SELECT * FROM Usuarios WHERE Correo = '";
+            sQuery+=sCorreo;
+            sQuery +="' AND Password = '";
+            sQuery+=sContra;
+            sQuery+="';";
+            stmStatement = conConnection.prepareStatement(sQuery);
+           
+            System.out.println(sCorreo);
+            System.out.println(sContra);
             try {
                 ResultSet rsReply = stmStatement.executeQuery(sQuery);
-                rsReply.absolute(1);
-                return (rsReply.getNString("Password").equals(sContra)) && (sCorreo == rsReply.getNString("Correo"));
+                return (rsReply.absolute(1));
             } catch (SQLException ex) {
-                throw new IllegalStateException("Cannot connect the database!", ex);
+                System.out.println(ex);
             }
         } catch (SQLException ex) {
-            throw new IllegalStateException("Cannot connect the database!", ex);
+            
+            System.out.println(ex);
         }
-        
+        return true;
     }
 
-    
 }

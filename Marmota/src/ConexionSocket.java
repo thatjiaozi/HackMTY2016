@@ -41,9 +41,12 @@ public class ConexionSocket implements Runnable{
                 String strDatos = bfrEntrada.readLine();
                 System.out.println(strDatos);
                if(dbConexion.login(strDatos)){
-                    dosSalida.writeInt(2);
+                    dosSalida.writeChar('2');
+                     socConexion.close();
                 }else{
-                    dosSalida.writeInt(3);
+                    dosSalida.writeChar('3');
+                    socConexion.close();
+                    
                 }
             } catch (IOException ex) {
                 Logger.getLogger(ConexionSocket.class.getName())
