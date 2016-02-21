@@ -119,7 +119,43 @@ public class ConexionSocket implements Runnable{
                                 dosSalida.println(inElemento.getTipo());
                                 
                             }
+                        }else if(iActividad == 8){
+                            double dLongitud = Double.parseDouble(bfrEntrada
+                                    .readLine());
+                            double dLatitud = Double.parseDouble(bfrEntrada
+                                    .readLine());
+                            int iHInicio = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            int iMInicio = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            int iHFinal = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            int iMFinal = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            int iTipoIncidente = Integer.parseInt(bfrEntrada
+                                    .readLine());
+                            List<Incidente> lklIncidentes = dbConexion
+                                    .filtrarIncidenteTipo(dLatitud,dLongitud
+                                          ,iHInicio,iMInicio, iHFinal, iMFinal,
+                                          iTipoIncidente);
+                            dosSalida.println(lklIncidentes.size());
+                            for(Incidente inElemento : lklIncidentes){
+                                dosSalida.println(inElemento.getDescripcion());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getDay());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getMonth());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getYear());
+                                dosSalida.println(inElemento.getHora());
+                                dosSalida.println(inElemento.getMinutos());
+                                dosSalida.println(inElemento.getLatitud());
+                                dosSalida.println(inElemento.getLongitud());
+                                dosSalida.println(inElemento.getTipo());
+                                
+                            }
                         }
+                        
                     }
                      socConexion.close();
                 }else{
