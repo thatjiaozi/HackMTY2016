@@ -194,6 +194,14 @@ public class Database {
                 sQuery += " AND Minutos < ";
                 sQuery += iMinutos2;
             }
+            sQuery += " AND Latitud >= ";
+            sQuery += (dLat - .00186);
+            sQuery += " AND Latitud < ";
+            sQuery += (dLat + .00186);
+            sQuery += " AND Longitud >= ";
+            sQuery += (dLong - .00186);
+            sQuery += " AND Longitud < ";
+            sQuery += (dLong + .00186);
             sQuery += ";";
             stmStatement = conConnection.prepareStatement(sQuery);
             ResultSet rsReply = stmStatement.executeQuery(sQuery);
@@ -209,5 +217,9 @@ public class Database {
             System.out.println(ex);
         }
     return arrIncidentes;
+    }
+    
+    public boolean panicIncidentes() {
+        return true;
     }
 }
