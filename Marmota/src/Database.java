@@ -194,7 +194,7 @@ public class Database {
                 sQuery += " AND Minutos <= ";
                 sQuery += iMinutos2;
             }
-            else {
+            else if (iHora1 < iHora2) {
                 sQuery += " OR Hora > ";
                 sQuery += iHora1;
                 sQuery += " AND Hora < ";
@@ -204,14 +204,24 @@ public class Database {
                 sQuery += " AND Minutos <= ";
                 sQuery += iMinutos2;
             }
+            else {
+                sQuery += " OR Hora > ";
+                sQuery += iHora1;
+                sQuery += " OR Hora < ";
+                sQuery += iHora2;
+                sQuery += " OR Hora = ";
+                sQuery += iHora2;
+                sQuery += " AND Minutos <= ";
+                sQuery += iMinutos2;
+            }
             sQuery += ") AND Latitud >= ";
-            sQuery += (dLat - .00186);
+            sQuery += (dLat - .0012);
             sQuery += " AND Latitud < ";
-            sQuery += (dLat + .00186);
+            sQuery += (dLat + .0012);
             sQuery += " AND Longitud >= ";
-            sQuery += (dLong - .00186);
+            sQuery += (dLong - .0012);
             sQuery += " AND Longitud < ";
-            sQuery += (dLong + .00186);
+            sQuery += (dLong + .0012);
             sQuery += ";";
             stmStatement = conConnection.prepareStatement(sQuery);
             ResultSet rsReply = stmStatement.executeQuery(sQuery);
