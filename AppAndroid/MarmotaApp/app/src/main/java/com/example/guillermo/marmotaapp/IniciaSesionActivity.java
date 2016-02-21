@@ -26,7 +26,6 @@ public class IniciaSesionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicia_sesion);
-
     }
 
     @Override
@@ -50,12 +49,16 @@ public class IniciaSesionActivity extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-<<<<<<< HEAD
-=======
 
     public void sendMessage(View view) {
-
-
+        SocketLogin socConexion = new SocketLogin();
+        EditText editText1 = (EditText) findViewById(R.id.email);
+        EditText editText2 = (EditText) findViewById(R.id.password);
+        String message = editText1.getText().toString() + "#" + editText2.getText().toString();
+        boolean bJala = socConexion.bLogin(message);
+        if(bJala)
+            System.out.println("Ahuevo");
+        else
+            System.out.println("Puta");
     }
->>>>>>> da4ba75786f02a6b15f7f2b96079f35fcf21f9b9
 }
