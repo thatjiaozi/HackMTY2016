@@ -12,9 +12,7 @@
     <string name="error_incorrect_password">This password is incorrect</string>
     <string name="error_field_required">This field is required</string>
     <string name="permission_rationale">"Contacts permissions are needed for providing email
-        completions."
-    </string>
-    <string name="prompt_email">Email</string>
+        completions."</string>
 
     <string name="title_activity_registro">RegistroActivity</string>
 </resources>

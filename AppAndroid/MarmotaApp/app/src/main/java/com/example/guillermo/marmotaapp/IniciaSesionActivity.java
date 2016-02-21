@@ -1,6 +1,7 @@
 package com.example.guillermo.marmotaapp;
 
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +12,8 @@ import android.view.MenuItem;
 import android.content.Intent;
 import android.widget.EditText;
 import java.io.BufferedReader;
+import java.io.DataOutputStream;
+import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -18,21 +21,15 @@ import java.net.Socket;
 
 public class IniciaSesionActivity extends AppCompatActivity {
 
-    private Socket socConect;
-    private BufferedReader bffEntrada;
-    private PrintWriter prwSalida;
 
+
+    SocketAndroid sckaConect;
+    Socket scoConn;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_inicia_sesion);
-        try {
-            socConect = new Socket("10.12.175.205", 7890);
-            bffEntrada = new BufferedReader(new InputStreamReader(socConect.getInputStream()));
-            prwSalida = new PrintWriter(new OutputStreamWriter(socConect.getOutputStream()));
-        } catch(Exception e) {
-            System.out.println("No jala esa madre");
-        }
+
     }
 
     @Override
@@ -58,9 +55,7 @@ public class IniciaSesionActivity extends AppCompatActivity {
     }
 
     public void sendMessage(View view) {
-        Intent intent = new Intent(this, DisplayMessageActivity.class);
-        EditText editText = (EditText) findViewById(R.id.email);
-        String message = editText.getText().toString();
-        intent.putExtra(EXTRA_MESSAGE, message);
+
+        
     }
 }
