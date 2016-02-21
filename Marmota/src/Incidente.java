@@ -23,7 +23,7 @@ public class Incidente {
     private int iHora;
     private int iMinutos;
     
-    private Incidente(String sUser, String sDesc, int iT, double dLat,
+    public Incidente(String sUser, String sDesc, int iT, double dLat,
             double dLong, int iY, int iM, int iD, int iH, int iMin) {
         sUsuario = sUser;
         sDescripcion = sDesc;
@@ -35,68 +35,73 @@ public class Incidente {
         setFecha(iY, iM, iD);
     }
     
-    private String getUsuario() {
+    public String getUsuario() {
         return sUsuario;
     }
     
-    private String getDescripcion() {
+    public String getDescripcion() {
         return sDescripcion;
     }
     
-    private int getTipo() {
+    public int getTipo() {
         return iTipo;
     }
     
-    private double getLatitud() {
+    public double getLatitud() {
         return dLatitud;
     }
     
-    private double getLongitud() {
+    public double getLongitud() {
         return dLongitud;
     }
     
-    private Date getFecha() {
+    public Date getFecha() {
         return dteFecha;
     }
     
-    private int getHora() {
+    public int getHora() {
         return iHora;
     }
     
-    private int getMinutos() {
+    public int getMinutos() {
         return iMinutos;
     }
     
-    private void setDescripcion(String sDesc) {
+    public void setDescripcion(String sDesc) {
         sDescripcion = sDesc;
     }
     
-    private void setTipo(int iType) {
+    public void setTipo(int iType) {
         iTipo = iType;
     }
     
-    private void setLatitud(double dLat) {
+    public void setLatitud(double dLat) {
         dLatitud = dLat;
     }
     
-    private void setLongitud(double dLong) {
+    public void setLongitud(double dLong) {
         dLongitud = dLong;
     }
     
-    private void setFecha(Date dteDate) {
+    public void setFecha(Date dteDate) {
         dteFecha = dteDate;
     }
     
-    private void setFecha(int iY, int iM, int iD) {
-        String sDate = iY + "-" + iM + "-" + iD;
+    public void setFecha(int iY, int iM, int iD) {
+        String sDate = "";
+        sDate += iY;
+        sDate += "-";
+        sDate += iM;
+        sDate += "-";
+        sDate += iD;
         dteFecha = valueOf(sDate);
     }
     
-    private void setHora(int iH) {
+    public void setHora(int iH) {
         iHora = iH;
     }
     
-    private void setMinutos(int iM) {
+    public void setMinutos(int iM) {
         iMinutos = iM;
     }
 }

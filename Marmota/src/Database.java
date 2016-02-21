@@ -105,20 +105,21 @@ public class Database {
             double dLatitud, double dLongitud, int iDia, int iMes, int iYear,
             int iHora, int iMinutos) {
         PreparedStatement stmStatement;
+        Incidente idtPrueba = new Incidente(sUsuario, sDescripcion, iTipo,
+                dLatitud, dLongitud, iYear, iMes, iDia, iHora, iMinutos);
         try {
             String sQuery = "INSERT INTO Incidentes VALUES('";
-            sQuery += sUsuario += currentTimeMillis();
-            sQuery += "', " + iTipo + ", " + dLatitud + ", " + dLongitud;
-            sQuery += ", '" + sDescripcion;
-            sQuery += "', '" + iYear + "-";
-            if (iMes < 10)
-                sQuery += "0";
-            sQuery += iMes + "-";
-            if (iDia < 10)
-                sQuery += "0";
-            sQuery += iDia + "', ";
-            sQuery += iHora + ", " + iMinutos + ", '";
-            sQuery += sUsuario + "')";
+            sQuery += idtPrueba.getUsuario();
+            sQuery += currentTimeMillis();
+            sQuery += "', " + idtPrueba.getTipo() + ", ";
+            sQuery += idtPrueba.getLatitud() + ", " + idtPrueba.getLongitud();
+            sQuery += ", '";
+            sQuery += idtPrueba.getDescripcion();
+            sQuery += "', '" + idtPrueba.getFecha().toString() + "', ";
+            sQuery += idtPrueba.getHora() + ", " + idtPrueba.getMinutos();
+            sQuery += ", '";
+            sQuery += idtPrueba.getUsuario();
+            sQuery += "')";
             stmStatement = conConnection.prepareStatement(sQuery);
             stmStatement.executeUpdate(sQuery);
             return true;
