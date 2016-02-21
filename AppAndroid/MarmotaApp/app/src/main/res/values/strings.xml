@@ -1,7 +1,8 @@
 <resources>
     <string name="app_name">MarmotaApp</string>
-    
-    <!-- Strings related to login -->
+    <string name="action_settings">Settings</string>
+
+    // Strings para actividad Inicia Sesion
     <string name="prompt_email">Email</string>
     <string name="prompt_password">Password (optional)</string>
     <string name="action_sign_in">Sign in or register</string>
