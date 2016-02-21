@@ -60,12 +60,41 @@ public class Database {
             sQuery+=sContra;
             sQuery+="';";
             stmStatement = conConnection.prepareStatement(sQuery);
-           
-            System.out.println(sCorreo);
-            System.out.println(sContra);
             try {
                 ResultSet rsReply = stmStatement.executeQuery(sQuery);
                 return (rsReply.absolute(1));
+            } catch (SQLException ex) {
+                System.out.println(ex);
+            }
+        } catch (SQLException ex) {
+            
+            System.out.println(ex);
+        }
+        return true;
+    }
+    
+    public boolean register(String sInfo) {
+        int iGato = sInfo.indexOf('#');
+        String sCorreo = sInfo.substring(0, iGato);
+        String sContra = sInfo.substring(iGato + 1);
+        PreparedStatement stmStatement;
+        try {
+            String sQuery = "SELECT * FROM Usuarios WHERE Correo = '";
+            sQuery+=sCorreo;
+            sQuery+="';";
+            stmStatement = conConnection.prepareStatement(sQuery);
+            try {
+                ResultSet rsReply = stmStatement.executeQuery(sQuery);
+                if (rsReply.absolute(1)) {
+                    return false;
+                }
+                sQuery = "INSERT INTO Usuarios VALUES ('";
+                sQuery += sCorreo;
+                sQuery += "', '";
+                sQuery += sContra;
+                sQuery += "')";
+                stmStatement.executeUpdate(sQuery);
+                return true;
             } catch (SQLException ex) {
                 System.out.println(ex);
             }
