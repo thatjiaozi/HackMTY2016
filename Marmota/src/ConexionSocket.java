@@ -20,13 +20,14 @@ public class ConexionSocket implements Runnable{
     private Database dbConexion;
     private Socket socConexion;
     private BufferedReader bfrEntrada;
-    private DataOutputStream dosSalida;
+    private PrintWriter dosSalida;
     public ConexionSocket(Socket socCon){
         this.socConexion=socCon;
         try{
         bfrEntrada = new BufferedReader(new InputStreamReader(socCon.
                 getInputStream()));
-        dosSalida = new DataOutputStream(socCon.getOutputStream());
+        dosSalida = new PrintWriter(new BufferedWriter(
+            new OutputStreamWriter(socCon.getOutputStream())),true);
         this.iType = Integer.parseInt(bfrEntrada.readLine());
         System.out.println(iType);
         }catch(Exception e){
@@ -41,9 +42,9 @@ public class ConexionSocket implements Runnable{
         if(iType == 1){
             try {
                 String strDatos = bfrEntrada.readLine();
-               
+                System.out.println(strDatos);
                if(dbConexion.login(strDatos)){
-                    dosSalida.writeChar('2');
+                    dosSalida.println('2');
                     int iGato = strDatos.indexOf('#');
                     
                     sUsuario = strDatos.substring(0,iGato);
@@ -69,7 +70,7 @@ public class ConexionSocket implements Runnable{
                     }
                      socConexion.close();
                 }else{
-                    dosSalida.writeChar('3');
+                    dosSalida.println('3');
                     socConexion.close();
                     
                 }
@@ -81,10 +82,10 @@ public class ConexionSocket implements Runnable{
             try {
                 String strDatos = bfrEntrada.readLine();
                if(dbConexion.register(strDatos)){
-                    dosSalida.writeChar('2');
+                    dosSalida.println('2');
                      socConexion.close();
                 }else{
-                    dosSalida.writeChar('3');
+                    dosSalida.println('3');
                     socConexion.close();
                     
                 }
