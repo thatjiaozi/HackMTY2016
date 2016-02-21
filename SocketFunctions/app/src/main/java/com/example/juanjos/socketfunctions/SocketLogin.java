@@ -17,6 +17,8 @@ public class SocketLogin implements Runnable {
     private String strMensaje;
     private boolean threadActivo;
     private boolean boolResultado;
+    private BufferedReader buffEntrada;
+    private PrintWriter prSalida;
     public boolean bLogin(String entrada){
 
         strMensaje = entrada;
@@ -37,8 +39,8 @@ public class SocketLogin implements Runnable {
         boolResultado=false;
         try {
             Socket socConn = new Socket(InetAddress.getByName("10.12.175.205"),7890);
-            BufferedReader buffEntrada = new BufferedReader(new InputStreamReader(socConn.getInputStream()));
-            PrintWriter prSalida = new PrintWriter(new BufferedWriter(
+            buffEntrada = new BufferedReader(new InputStreamReader(socConn.getInputStream()));
+            prSalida = new PrintWriter(new BufferedWriter(
             new OutputStreamWriter(socConn.getOutputStream())),true);
             prSalida.println("1");
             prSalida.println(strMensaje);
