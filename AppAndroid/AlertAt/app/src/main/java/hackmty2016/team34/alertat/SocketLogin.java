@@ -1,4 +1,4 @@
-package com.example.guillermo.marmotaapp;
+package hackmty2016.team34.alertat;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -6,7 +6,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
-import java.io.Serializable;
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.Socket;
@@ -14,7 +13,7 @@ import java.net.Socket;
 /**
  * Created by JuanJosé on 20/02/2016.
  */
-public class SocketLogin implements Runnable, Serializable {
+public class SocketLogin implements Runnable {
     private String strMensaje;
     private boolean threadActivo;
     private boolean boolResultado;
