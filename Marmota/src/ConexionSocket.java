@@ -81,8 +81,24 @@ public class ConexionSocket implements Runnable{
                             int iMFinal = Integer.parseInt(bfrEntrada
                                     .readLine());
                             List<Incidente> lklIncidentes = dbConexion
-                                    .filtrarIncidenteHora(dLatitud,dLongitud,iHInicio, 
-                                            iMInicio, iHFinal, iMFinal);
+                                    .filtrarIncidenteHora(dLatitud,dLongitud
+                                          ,iHInicio,iMInicio, iHFinal, iMFinal);
+                            dosSalida.println(lklIncidentes.size());
+                            for(Incidente inElemento : lklIncidentes){
+                                dosSalida.println(inElemento.getDescripcion());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getDay());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getMonth());
+                                dosSalida.println(inElemento.getFecha()
+                                        .getYear());
+                                dosSalida.println(inElemento.getHora());
+                                dosSalida.println(inElemento.getMinutos());
+                                dosSalida.println(inElemento.getLatitud());
+                                dosSalida.println(inElemento.getLongitud());
+                                dosSalida.println(inElemento.getTipo());
+                                
+                            }
                         }
                     }
                      socConexion.close();
