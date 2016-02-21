@@ -191,7 +191,17 @@ public class Database {
             sQuery += " AND Minutos >= ";
             sQuery += iMinutos1;
             if (iHora1 == iHora2) {
-                sQuery += " AND Minutos < ";
+                sQuery += " AND Minutos <= ";
+                sQuery += iMinutos2;
+            }
+            else {
+                sQuery += " OR Hora > ";
+                sQuery += iHora1;
+                sQuery += " AND Hora < ";
+                sQuery += iHora2;
+                sQuery += " OR Hora = ";
+                sQuery += iHora2;
+                sQuery += " AND Minutos <= ";
                 sQuery += iMinutos2;
             }
             sQuery += " AND Latitud >= ";
